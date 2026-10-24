@@ -61,5 +61,17 @@ func main() {
 			fmt.Println("内容を入力してください")
 			os.Exit(1)
 		}
+		maxID := 0
+		for _, t := range todos {
+			if t.ID > maxID {
+				maxID = t.ID
+			}
+		}
+		todos = append(todos, Todo{ID: maxID + 1, Title: Title})
+		if err := save(todos); err != nil {
+			fmt.Println("保存に失敗:", err)
+			os.Exit(1)
+		}
+		fmt.Println("追加しました:", title)
 	}
 }
